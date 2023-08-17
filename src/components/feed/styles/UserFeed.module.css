@@ -1,5 +1,6 @@
 .feed {
-    min-height: 16rem;
+    min-height: 20rem;
     grid-column: 5 / 11;
     grid-row: 2;
+    margin-bottom: 2rem;
 }

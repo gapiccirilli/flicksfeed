@@ -1,4 +1,5 @@
 .flicks {
+    height: 25rem;
     grid-column: 11 / 14;
-    grid-row: 2 / 4;
+    grid-row: 2;
 }
