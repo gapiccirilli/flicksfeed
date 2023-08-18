@@ -37,6 +37,16 @@
     align-items: center;
 }
 
+.textArea {
+    resize: none;
+    border: none;
+    border-radius: 1rem;
+    background: transparent;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: 1rem;
+}
+
 .btns {
     display: flex;
     flex-direction: row;

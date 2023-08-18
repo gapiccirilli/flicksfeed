@@ -23,8 +23,3 @@
     height: 2.5rem;
     cursor: pointer;
 }
-
-.rating img:nth-of-type(1) {
-    color: yellow;
-}
-

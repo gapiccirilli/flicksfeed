@@ -20,7 +20,7 @@ export default function Rating() {
             <img onMouseOver={() => {dispatch({type: "hover", payload: 2})}} 
             onMouseOut={() => {dispatch({type: "hoverOff", payload: 2})}}
             onClick={() => {dispatch({type: "click", payload: 2})}}
-            className={`${styles.star}`} src={ratingState.hoverState > 1 ||  ratingState.clickState > 1 ? starFill : star} 
+            className={`${styles.star}`} src={ratingState.hoverState > 1 || ratingState.clickState > 1 ? starFill : star} 
             alt="rating" />
             <img onMouseOver={() => {dispatch({type: "hover", payload: 3})}} 
             onMouseOut={() => {dispatch({type: "hoverOff", payload: 3})}}

@@ -17,7 +17,7 @@ export default function Review() {
         <Rating />
       </div>
       <div className={styles.myReview}>
-
+        <textarea className={styles.textArea} rows="8" cols="80" />
       </div>
       <div className={styles.btns}>
 
