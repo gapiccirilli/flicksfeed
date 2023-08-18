@@ -1,9 +1,10 @@
+import Review from '../review-components/Review';
 import styles from './styles/UserFeed.module.css';
 
 export default function UserFeed() {
   return (
-    <div className={`${styles.feed} section`}>
-        
-    </div>
+    <section className={`${styles.feed} section`}>
+        <Review />
+    </section>
   );
 }
