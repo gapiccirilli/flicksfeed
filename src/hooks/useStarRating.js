@@ -2,30 +2,22 @@ import { useReducer } from "react";
 
 function reducer(state, action) {
     switch(action.type) {
-        case "noRating":
-            return { oneStar: "star", twoStar: "star", threeStar: "star", fourStar: "star", fiveStar: "star" };
-        case "oneStar":
-            return { oneStar: "starFill", twoStar: "star", threeStar: "star", fourStar: "star", fiveStar: "star" };
-        case "twoStar":
-            return { oneStar: "starFill", twoStar: "starFill", threeStar: "star", fourStar: "star", fiveStar: "star" };
-        case "threeStar":
-            return { oneStar: "starFill", twoStar: "starFill", threeStar: "starFill", fourStar: "star", fiveStar: "star" };
-        case "fourStar":
-            return { oneStar: "starFill", twoStar: "starFill", threeStar: "starFill", fourStar: "starFill", fiveStar: "star" };
-        case "fiveStar":
-            return { oneStar: "starFill", twoStar: "starFill", threeStar: "starFill", fourStar: "starFill", fiveStar: "starFill" };
+        case "hover":
+            return { ...state, hoverState: action.payload};
+        case "hoverOff":
+            return { ...state, hoverState: 0};
+        case "click":
+            return { ...state, clickState: action.payload};
         default:
-            return {...state};
+            return state;
     }
 }
 
 export function useStarRating() {
-    const initialState = {
-        oneStar: "star",
-        twoStar: "star",
-        threeStar: "star",
-        fourStar: "star",
-        fiveStar: "star"
+
+    const initialState = { 
+        hoverState: 0,
+        clickState: 0
     };
 
     return useReducer(reducer, initialState);
