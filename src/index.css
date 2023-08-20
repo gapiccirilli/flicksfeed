@@ -15,3 +15,15 @@ body {
   background-color: var(--container-bg-color);
   border-radius: 0.5rem;
 }
+
+.site-button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.432);
+}
+
+.site-button:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.591);
+}
