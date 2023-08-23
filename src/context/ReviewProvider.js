@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-const Context = createContext();
+export const ReviewContext = createContext();
 
 function reducer(state, action) {
     switch(action.type) {
@@ -13,12 +13,15 @@ function reducer(state, action) {
             return { ...state, rating: action.payload.rating, ratingClickCount: action.payload.ratingClickCount};
         case "review/post":
             return { ...state, reviewPost: action.payload};
+        case "review/cancel":
+            return { ...state, movieImg: "", movieData: {}, synopsis: "", searchQuery: "", rating: 0, ratingClickCount: 0, 
+            reviewPost: ""};
         default:
             return state;
     }
 }
 
-export function ReviewContext({ children }) {
+export function ReviewProvider({ children }) {
 
     const initialState = {
         movieImg: "",
@@ -27,13 +30,13 @@ export function ReviewContext({ children }) {
         searchQuery: "",
         rating: 0,
         ratingClickCount: 0,
-        reviewPost: ""
+        reviewPost: "",
     };
 
     const [reviewState, dispatch] = useReducer(reducer, initialState);
 
     function setMovie(movie) {
-        dispatch({type: "review/setMovie", payload: {movieImg: movie.image, movieData: movie.data}});
+        dispatch({type: "review/setMovie", payload: {movieImg: movie.image, movieData: movie.data, synopsis: movie.synopsis}});
     }
 
     function search(query) {
@@ -48,9 +51,12 @@ export function ReviewContext({ children }) {
         dispatch({type: "review/post", payload: reviewPost})
     }
 
+    function cancel() {
+        dispatch({type: "review/cancel"});
+    }
     return (
-        <Context.Provider value={{reviewState, setMovie, search, rate, post}}>
+        <ReviewContext.Provider value={{reviewState, setMovie, search, rate, post, cancel}}>
             {children}
-        </Context.Provider>
+        </ReviewContext.Provider>
     );
 }
