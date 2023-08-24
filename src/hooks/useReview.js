@@ -3,8 +3,7 @@ import { useReducer } from "react";
 function reducer(state, action) {
     switch(action.type) {
         case "review/setMovie":
-            return { ...state, movieImg: action.payload.movieImg, movieData: action.payload.movieData, 
-                synopsis: action.payload.synopsis, mediaIsSelected: true};
+            return { ...state, movieData: action.payload,  mediaIsSelected: true};
         case "review/search":
             return { ...state, searchQuery: action.payload};
         case "review/rate":
@@ -12,7 +11,7 @@ function reducer(state, action) {
         case "review/post":
             return { ...state, reviewPost: action.payload};
         case "review/cancel":
-            return { ...state, movieImg: "", movieData: {}, synopsis: "", searchQuery: "", rating: 0, ratingClickCount: 0, 
+            return { ...state, movieData: [], synopsis: "", searchQuery: "", rating: 0, ratingClickCount: 0, 
             reviewPost: "", mediaIsSelected: false};
         default:
             return state;
@@ -22,8 +21,7 @@ function reducer(state, action) {
 export function useReview() {
 
     const initialState = {
-        movieImg: "",
-        movieData: {},
+        movieData: [],
         synopsis: "",
         searchQuery: "",
         rating: 0,

@@ -14,7 +14,7 @@ export default function Review() {
   const showMedia = true;
 
   function setMovie(movie) {
-    dispatch({type: "review/setMovie", payload: {movieImg: movie.image, movieData: movie.data, synopsis: movie.synopsis}});
+    dispatch({type: "review/setMovie", payload: movie });
   }
 
   function search(query) {
@@ -40,7 +40,7 @@ export default function Review() {
         <Synopsis synopsis={reviewState.synopsis}/>
       </div>}
       <div className={styles.tools}>
-        <MovieSearch search={search} onMovie={setMovie}/>
+        <MovieSearch search={search} onMovie={setMovie} movies={reviewState.movieData} />
         {showMedia && <Rating rate={rate}/>}
       </div>
       <div className={styles.myReview}>

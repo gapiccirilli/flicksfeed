@@ -1,4 +1,5 @@
 .searchContainer {
+    position: relative;
     background-color: rgba(0, 0, 0, 0.481);
     height: 2rem;
     width: 16rem;
@@ -7,9 +8,11 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
+    z-index: 1;
 }
 
 .search {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,6 +23,7 @@
 }
 
 .search input {
+    position: relative;
     width: 100%;
     height: 1.2rem;
     border: none;
@@ -45,4 +49,69 @@
 
 .search button:active {
     color: black;
+}
+
+.withDropDown {
+    position: relative;
+}
+
+.dropDown {
+    position: absolute;
+    top: 80%;
+    width: 16rem;
+    max-height: 16rem;
+    background-color: rgba(0, 0, 0, 0.481);
+    z-index: -1;
+    overflow-y: auto;
+}
+
+.listItem {
+    color: white;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.1s ease-in-out;
+}
+
+.listItem:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.369);
+}
+
+.movieData {
+    width: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.title {
+    font-size: 0.9rem;
+}
+
+.title span:last-of-type {
+    font-size: 0.8rem;
+}
+
+.type {
+    font-size: 0.9rem;
+}
+
+.type span:last-of-type {
+    font-size: 0.8rem;
+}
+
+.release {
+    font-size: 0.9rem;
+}
+
+.release span:last-of-type {
+    font-size: 0.8rem;
 }
