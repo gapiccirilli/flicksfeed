@@ -2,6 +2,14 @@
   --site-bg-color: #3a414a;
   --container-bg-color: #4c535d;
   --post-bg-color: #6f7681;
+
+  --review-text-color: rgb(197, 197, 197);
+  --review-title-color: rgb(186, 186, 186);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
 }
 
 body {

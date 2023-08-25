@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import styles from './styles/MovieSearch.module.css';
 import { ReviewContext } from '../../context/ReviewProvider';
 
-export default function MovieSearch({ onMovie }) {
+export default function MovieSearch({ onMovieSelect }) {
 
   const [movies, setMovies] = useState([]);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -25,7 +25,6 @@ export default function MovieSearch({ onMovie }) {
       const data = await response.json();
 
       if (data.Response === "True") {
-        // onMovie(data.Search);
         setMovies(data.Search);
       }
 
@@ -41,7 +40,7 @@ export default function MovieSearch({ onMovie }) {
             <input type="text" placeholder="Find a movie or show..." onChange={handleQuery} />
         </form>
         {showDropDown && <div className={styles.dropDown}>
-          {movies.map((movie) => <div className={styles.listItem} key={movie.imdbID}>
+          {movies.map((movie) => <div onClick={() => onMovieSelect(movie)} className={styles.listItem} key={movie.imdbID}>
             <img src={movie.Poster} alt={movie.Title} style={{width: "4rem", height: "5rem"}}/>
             <div className={styles.movieData}>
               <div className={styles.title}>
