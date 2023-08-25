@@ -5,8 +5,13 @@ export default function MediaData({ data }) {
   let rating;
 
   if (data.Type === "movie") {
-    ratingType = data.Ratings[1].Source;
-    rating = data.Ratings[1].Value;
+    if (data.Ratings[1] !== undefined) {
+      ratingType = data.Ratings[1].Source;
+      rating = data.Ratings[1].Value;
+    } else {
+      ratingType = "IMDB";
+      rating = data.Ratings[0].Value;
+    }
   } else if (data.Type === "series") {
     ratingType = "IMDB";
     rating = data.Ratings[0].Value;

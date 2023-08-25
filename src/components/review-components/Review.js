@@ -6,25 +6,20 @@ import Rating from './Rating';
 import Synopsis from './Synopsis';
 import styles from './styles/Review.module.css';
 import { useReview } from '../../hooks/useReview';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function Review() {
   const [movie, setMovie] = useState({});
-
+  const [showMedia, setShowMedia] = useState(false);
   const [reviewState, dispatch] = useReview();
-  // const showMedia = reviewState.mediaIsSelected;
-  const showMedia = true;
+  const textRef = useRef("");
 
   function rate(rating) {
     dispatch({type: "review/rate", payload: {rating: rating.rating, ratingClickCount: rating.ratingClickCount}});
   }
 
-  function cancel() {
-    dispatch({type: "review/cancel"});
-  }
-
-  const handleMovieSelect = async (movie) => {
-    // make api call for synopsis | refactor into new hook
+  const handleMovieSelect = async (movie, closeCallBack, inputElement) => {
+    // refactor into new hook
     try {
       const response = await fetch(`http://www.omdbapi.com/?apikey=367fae11&i=${movie.imdbID}&plot=full`);
       
@@ -37,11 +32,18 @@ export default function Review() {
       if (data.Response === "True") {
         setMovie(data);
       }
-
+      setShowMedia(true);
+      closeCallBack(false);
+      inputElement.current.value = "";
     } catch(error) {
       console.log(error.message);
     }
     // ------------------------------------------------------------
+  };
+
+  const handleCancel = () => {
+    setShowMedia(false);
+    textRef.current.value = "";
   };
 
   return (
@@ -55,12 +57,13 @@ export default function Review() {
         {showMedia && <Rating rate={rate}/>}
       </div>
       <div className={styles.myReview}>
-        <textarea className={styles.textArea} placeholder='Tell us your thoughts...' disabled={showMedia ? false : true} />
+        <textarea className={styles.textArea} placeholder={showMedia ? 'Tell us your thoughts...' : ''} 
+        disabled={showMedia ? false : true} ref={textRef} />
       </div>
       <div className={styles.btnsContainer}>
         {showMedia && <div className={styles.btns}>
           <SubmitButton>Submit</SubmitButton>
-          <CancelButton onCancel={cancel}>Cancel</CancelButton>
+          <CancelButton onCancel={handleCancel}>Cancel</CancelButton>
         </div>}
       </div>
     </div>
