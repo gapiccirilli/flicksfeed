@@ -5,44 +5,29 @@ import MovieSearch from './MovieSearch';
 import Rating from './Rating';
 import Synopsis from './Synopsis';
 import styles from './styles/Review.module.css';
-import { useReview } from '../../hooks/useReview';
 import { useRef, useState } from 'react';
+import { fetchMovies } from '../../helpers/fetchMovieData';
+import { useStarRating } from '../../hooks/useStarRating';
 
 export default function Review() {
   const [movie, setMovie] = useState({});
   const [showMedia, setShowMedia] = useState(false);
-  const [reviewState, dispatch] = useReview();
+  const [ratingState, dispatch] = useStarRating();
+  const ratingCount = useRef(0);
   const textRef = useRef("");
 
-  function rate(rating) {
-    dispatch({type: "review/rate", payload: {rating: rating.rating, ratingClickCount: rating.ratingClickCount}});
-  }
-
-  const handleMovieSelect = async (movie, closeCallBack, inputElement) => {
-    // refactor into new hook
-    try {
-      const response = await fetch(`http://www.omdbapi.com/?apikey=367fae11&i=${movie.imdbID}&plot=full`);
-      
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      
-      const data = await response.json();
-      
-      if (data.Response === "True") {
-        setMovie(data);
-      }
-      setShowMedia(true);
-      closeCallBack(false);
-      inputElement.current.value = "";
-    } catch(error) {
-      console.log(error.message);
-    }
-    // ------------------------------------------------------------
+  const handleMovieSelect = (movie, closeCallBack, inputElement) => {
+    fetchMovies(movie.imdbID, {setMovie, setShowMedia, closeCallBack}, inputElement);
+    dispatch({type: "click", payload: 0});
+    ratingCount.current = 0;
   };
 
   const handleCancel = () => {
     setShowMedia(false);
+    if (ratingState.clickState !== 0) {
+      dispatch({type: "click", payload: 0});
+      ratingCount.current = 0;
+    }
     textRef.current.value = "";
   };
 
@@ -54,7 +39,7 @@ export default function Review() {
       </div>}
       <div className={styles.tools}>
         <MovieSearch onMovieSelect={handleMovieSelect} />
-        {showMedia && <Rating rate={rate}/>}
+        {showMedia && <Rating dispatch={dispatch} ratingState={ratingState} ratingCount={ratingCount} />}
       </div>
       <div className={styles.myReview}>
         <textarea className={styles.textArea} placeholder={showMedia ? 'Tell us your thoughts...' : ''} 
