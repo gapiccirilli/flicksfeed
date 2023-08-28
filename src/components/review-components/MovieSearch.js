@@ -1,6 +1,6 @@
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './styles/MovieSearch.module.css';
-import { ReviewContext } from '../../context/ReviewProvider';
+import { searchMovies } from '../../helpers/searchMovies';
 
 export default function MovieSearch({ onMovieSelect }) {
 
@@ -8,7 +8,7 @@ export default function MovieSearch({ onMovieSelect }) {
   const [movies, setMovies] = useState([]);
   const [showDropDown, setShowDropDown] = useState(false);
 
-  const handleQuery = async (event) => {
+  const handleQuery = (event) => {
 
     if (event.target.value.length > 2) {
       setShowDropDown(true);
@@ -16,22 +16,7 @@ export default function MovieSearch({ onMovieSelect }) {
       setShowDropDown(false);
     }
 
-    try {
-      const response = await fetch(`http://www.omdbapi.com/?apikey=367fae11&s=${event.target.value}`);
-      
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-
-      const data = await response.json();
-
-      if (data.Response === "True") {
-        setMovies(data.Search);
-      }
-
-    } catch(error) {
-
-    }
+    searchMovies(event, setMovies);
   };
   
   return (

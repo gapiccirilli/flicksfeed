@@ -1,17 +1,8 @@
 import styles from './styles/Rating.module.css';
 import star from "../../assets/star-rating.png";
 import starFill from "../../assets/star-colored.png";
-import { useStarRating } from '../../hooks/useStarRating';
-import { useEffect, useRef } from 'react';
 
 export default function Rating({ dispatch, ratingState, ratingCount }) {
-
-  // const [ratingState, dispatch] = useStarRating();
-  // const ratingCount = useRef(0);
-
-  // const handleRating = () => {
-  //   rate({rating: ratingState.clickState, ratingClickCount: ratingCount});
-  // };
 
   return (
     <fieldset className={styles.ratingContainer}>
