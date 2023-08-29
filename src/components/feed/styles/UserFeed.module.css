@@ -3,4 +3,8 @@
     grid-column: 5 / 11;
     grid-row: 2;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2rem;
 }

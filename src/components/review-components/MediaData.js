@@ -1,6 +1,6 @@
 import styles from './styles/MediaData.module.css';
 
-export default function MediaData({ data }) {
+export default function MediaData({ data, width="35%", height="100%"}) {
   let ratingType;
   let rating;
 
@@ -18,7 +18,7 @@ export default function MediaData({ data }) {
   }
 
   return (
-    <div className={styles.mediaData}>
+    <div className={styles.mediaData} style={{width: width, height: height}}>
       <img src={data.Poster} alt={data.Title} style={{width: "7rem", height: "9rem"}} />
       <div className={styles.text}>
         <h3>{data.Title}</h3>
