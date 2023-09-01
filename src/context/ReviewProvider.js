@@ -5,17 +5,19 @@ export const ReviewContext = createContext();
 function reducer(state, action) {
     switch(action.type) {
         case "review/setMovie":
-            return { ...state, movieImg: action.payload.movieImg, movieData: action.payload.movieData, 
-                synopsis: action.payload.synopsis};
-        case "review/search":
-            return { ...state, searchQuery: action.payload};
-        case "review/rate":
-            return { ...state, rating: action.payload.rating, ratingClickCount: action.payload.ratingClickCount};
+            return { ...state, movie: action.payload };
         case "review/post":
-            return { ...state, reviewPost: action.payload};
+            if (state.posts) {
+                return { ...state, posts: [...state.posts, { movie: state.movie, 
+                    rating: action.payload.rating, 
+                    text: action.payload.text}] };
+            } else {
+                return { ...state, posts: [{ movie: state.movie, 
+                    rating: action.payload.rating, 
+                    text: action.payload.text}] };
+                }
         case "review/cancel":
-            return { ...state, movieImg: "", movieData: {}, synopsis: "", searchQuery: "", rating: 0, ratingClickCount: 0, 
-            reviewPost: ""};
+            return { ...state, movie: {} };
         default:
             return state;
     }
@@ -24,38 +26,26 @@ function reducer(state, action) {
 export function ReviewProvider({ children }) {
 
     const initialState = {
-        movieImg: "",
-        movieData: {},
-        synopsis: "",
-        searchQuery: "",
-        rating: 0,
-        ratingClickCount: 0,
-        reviewPost: "",
+       movie: {},
+       posts: [],
     };
 
     const [reviewState, dispatch] = useReducer(reducer, initialState);
 
     function setMovie(movie) {
-        dispatch({type: "review/setMovie", payload: {movieImg: movie.image, movieData: movie.data, synopsis: movie.synopsis}});
-    }
-
-    function search(query) {
-        dispatch({type: "review/search", payload: query});
-    }
-
-    function rate(rating) {
-        dispatch({type: "review/rate", payload: {rating: rating.rating, ratingClickCount: rating.ratingClickCount}});
+        dispatch({type: "review/setMovie", payload: movie});
     }
 
     function post(reviewPost) {
-        dispatch({type: "review/post", payload: reviewPost})
+        dispatch({type: "review/post", payload: reviewPost});
     }
 
     function cancel() {
         dispatch({type: "review/cancel"});
     }
+
     return (
-        <ReviewContext.Provider value={{reviewState, setMovie, search, rate, post, cancel}}>
+        <ReviewContext.Provider value={{reviewState, setMovie, post, cancel}}>
             {children}
         </ReviewContext.Provider>
     );

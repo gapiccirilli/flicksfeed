@@ -17,3 +17,16 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+.text {
+    box-sizing: border-box;
+
+    width: 100%;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    overflow-y: auto;
+}
+
+.text p {
+    padding: 1rem;
+}
