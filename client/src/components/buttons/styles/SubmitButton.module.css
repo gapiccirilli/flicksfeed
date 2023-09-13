@@ -2,3 +2,9 @@
     background-color: rgb(0, 126, 157);
     color: rgb(209, 209, 209);
 }
+
+.submit:disabled {
+    background-color: rgb(184, 184, 184);
+    color: rgb(99, 99, 99);
+    cursor: default;
+}

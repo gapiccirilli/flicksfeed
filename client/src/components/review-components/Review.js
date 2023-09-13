@@ -6,7 +6,7 @@ import Rating from './Rating';
 import Synopsis from './Synopsis';
 import styles from './styles/Review.module.css';
 import { useRef, useState } from 'react';
-import { fetchMovies } from '../../helpers/fetchMovieData';
+import { getMovieById } from '../../hooks/requests/GET';
 import { useStarRating } from '../../hooks/useStarRating';
 
 export default function Review({ onPost }) {
@@ -18,7 +18,7 @@ export default function Review({ onPost }) {
   const textRef = useRef("");
 
   const handleMovieSelect = (movie, closeCallBack, inputElement) => {
-    fetchMovies(movie.imdbID, {setMovie, setShowMedia, closeCallBack}, inputElement);
+    getMovieById(movie.imdbID, {setMovie, setShowMedia, closeCallBack}, inputElement);
     dispatch({type: "click", payload: 0});
     ratingCount.current = 0;
   };
@@ -37,8 +37,8 @@ export default function Review({ onPost }) {
       ratingCount.current = 0;
     }
     textRef.current.value = "";
-
   };
+  console.log(movie);
 
   return (
     <div className={styles.review}>
@@ -56,7 +56,8 @@ export default function Review({ onPost }) {
       </div>
       <div className={styles.btnsContainer}>
         {showMedia && <div className={styles.btns}>
-          <SubmitButton onSubmit={handleSubmit}>Submit</SubmitButton>
+          <SubmitButton onSubmit={handleSubmit} 
+          unactive={ratingState.clickState === 0}>Submit</SubmitButton>
           <CancelButton onCancel={handleCancel}>Cancel</CancelButton>
         </div>}
       </div>

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import styles from './styles/MovieSearch.module.css';
-import { searchMovies } from '../../helpers/searchMovies';
+import { getMovies } from '../../hooks/requests/GET';
 
 export default function MovieSearch({ onMovieSelect }) {
 
@@ -16,7 +16,7 @@ export default function MovieSearch({ onMovieSelect }) {
       setShowDropDown(false);
     }
 
-    searchMovies(event, setMovies);
+    getMovies(event, setMovies);
   };
   
   return (

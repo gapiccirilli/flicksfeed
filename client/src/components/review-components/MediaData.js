@@ -14,7 +14,7 @@ export default function MediaData({ data, width="35%", height="100%"}) {
     }
   } else if (data.Type === "series") {
     ratingType = "IMDB";
-    rating = data.Ratings[0].Value;
+    rating = data.imdbRating;
   }
 
   return (
