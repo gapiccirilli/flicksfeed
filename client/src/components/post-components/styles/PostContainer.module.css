@@ -20,7 +20,7 @@
 
 .text {
     box-sizing: border-box;
-
+    height: 25%;
     width: 100%;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
@@ -28,7 +28,7 @@
 }
 
 .text p {
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .blank p {

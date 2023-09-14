@@ -1,5 +1,5 @@
 
-
+// OMDB API
 async function getMovieById(movieId, callbacks, inputElement) {
     const { setMovie, setShowMedia, closeCallBack } = callbacks;
     try {
@@ -21,7 +21,7 @@ async function getMovieById(movieId, callbacks, inputElement) {
         console.log(error.message);
       }
 }
-
+// OMDB API
 async function getMovies(event, setMovies) {
     try {
         const response = await fetch(`http://www.omdbapi.com/?apikey=367fae11&s=${event.target.value}`);

@@ -2,6 +2,7 @@ import styles from './styles/PostContainer.module.css';
 import MediaData from '../review-components/MediaData';
 import StaticRating from './StaticRating';
 import FilmDesign from './FilmDesign';
+import InteractBox from './InteractBox';
 
 export default function PostContainer({ movie, rating, text }) {
 
@@ -14,6 +15,7 @@ export default function PostContainer({ movie, rating, text }) {
           <div className={`${text ? styles.text : styles.blank}`}>
             <p>{text ? text : `${rating} ${rating === 1 ? "star" : "stars"}`}</p>
           </div>
+          <InteractBox />
         </div>
         <FilmDesign />
     </div>

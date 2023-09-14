@@ -8,6 +8,7 @@ import styles from './styles/Review.module.css';
 import { useRef, useState } from 'react';
 import { getMovieById } from '../../hooks/requests/GET';
 import { useStarRating } from '../../hooks/useStarRating';
+import { createPost } from '../../hooks/requests/POST';
 
 export default function Review({ onPost }) {
   const [movie, setMovie] = useState({});
@@ -23,9 +24,10 @@ export default function Review({ onPost }) {
     ratingCount.current = 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const returnedPost = await createPost({movie: movie, rating: ratingState.clickState, postText: textRef.current.value});
     onPost((prev) => {
-      return [...prev, {movie: movie, rating: ratingState.clickState, postText: textRef.current.value}];
+      return [...prev, returnedPost];
     });
     handleCancel();
   };
@@ -38,7 +40,6 @@ export default function Review({ onPost }) {
     }
     textRef.current.value = "";
   };
-  console.log(movie);
 
   return (
     <div className={styles.review}>
