@@ -1,4 +1,6 @@
-.flicks {
+.comments {
+    position: sticky;
+    top: 0;
     height: 25rem;
     grid-column: 11 / 14;
     grid-row: 2;

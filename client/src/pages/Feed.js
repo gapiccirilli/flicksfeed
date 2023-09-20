@@ -1,5 +1,5 @@
+import Comments from '../components/comments/Comments';
 import UserFeed from '../components/feed/UserFeed';
-import MyFlicks from '../components/my-flicks/MyFlicks';
 import SideBar from '../components/nav/SideBar';
 import { ReviewProvider } from '../context/ReviewProvider';
 import styles from './styles/Feed.module.css';
@@ -11,7 +11,7 @@ export default function Feed() {
       <ReviewProvider>
         <UserFeed />
       </ReviewProvider>
-      <MyFlicks />
+      <Comments />
     </main>
   );
 }
