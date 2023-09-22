@@ -1,7 +1,64 @@
-.comments {
+.commentsSection {
     position: sticky;
     top: 0;
     height: 25rem;
     grid-column: 11 / 14;
     grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.title {
+    width: min-content;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    border-bottom: solid rgb(0, 0, 0) 0.1rem;
+}
+
+.titleContainer {
+    width: 100%;
+    height: 10%;
+}
+
+.commentsContainer {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+}
+
+.commentsContainer div:last-of-type {
+    margin-bottom: 1rem;
+}
+
+.commentsContainer fieldset {
+    margin: 0;
+    padding: 0;
+    padding-right: 0.5rem;
+    border: none;
+}
+
+.commentsContainer fieldset legend {
+    color: rgb(0, 0, 120);
+    cursor: pointer;
+}
+
+.comment {
+    background-color: var(--post-bg-color);
+    width: 80%;
+    min-height: 15%;
+    max-height: 15%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    overflow-y: hidden;
+}
+
+.comment p {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
 }

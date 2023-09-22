@@ -4,12 +4,12 @@ import StaticRating from './StaticRating';
 import FilmDesign from './FilmDesign';
 import InteractBox from './InteractBox';
 
-export default function PostContainer({ movie, rating, text }) {
+export default function PostContainer({ movie, rating, text, isPlain }) {
 
   return (
     <div className={styles.container}>
-      <FilmDesign />
-        <div className={`${styles.post}`}>
+      {!isPlain && <FilmDesign />}
+        <div className={`${styles.post}`} style={isPlain ? {width: "100%"} : {}}>
           <MediaData data={movie} width={"100%"} height={"55%"}/>
           <StaticRating rating={rating}/>
           <div className={`${text ? styles.text : styles.blank}`}>
@@ -17,7 +17,7 @@ export default function PostContainer({ movie, rating, text }) {
           </div>
           <InteractBox />
         </div>
-        <FilmDesign />
+        {!isPlain && <FilmDesign />}
     </div>
   );
 }
