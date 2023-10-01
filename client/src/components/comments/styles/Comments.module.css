@@ -46,20 +46,3 @@
     color: rgb(0, 0, 120);
     cursor: pointer;
 }
-
-.comment {
-    background-color: var(--post-bg-color);
-    /* width: 80%;
-    min-height: 15%;
-    max-height: 15%; */
-    /* margin-left: 1rem;
-    margin-top: 1rem; */
-    border-radius: 0.5rem;
-    overflow-y: hidden;
-}
-
-.comment p {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
-}

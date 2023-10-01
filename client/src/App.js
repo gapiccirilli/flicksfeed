@@ -3,10 +3,12 @@ import styles from './App.css';
 import Layout from './pages/Layout';
 import Feed from './pages/Feed';
 import Home from './pages/Home';
+import FeedProvider from './context/FeedProvider';
 
 function App() {
   return (
     <div className={styles.app}>
+      <FeedProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -16,6 +18,7 @@ function App() {
           </Route> 
         </Routes>
       </BrowserRouter>
+      </FeedProvider>
     </div>
   );
 }
